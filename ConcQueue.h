@@ -127,8 +127,17 @@ public:
 
 	~ConcQueue()
 	{
-		delete[] head;
-		delete tail;
+		QueueElement<data_val_type> *temp = NULL;
+
+		temp = head;
+
+		while(head != NULL)
+		{
+			temp = head->GetPointer();
+			delete head;
+			head = temp;
+		}
+
 	}
 };
 		 
