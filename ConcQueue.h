@@ -20,7 +20,7 @@ public:
 	{
 	}
 
-	data_val_type GetData()
+	data_val_type GetData() const
 	{
 		return data_value;
 	}
@@ -78,7 +78,7 @@ public:
 		}
 	}
 	
-	QueueElement<data_val_type>* AddElement(data_val_type val)
+	const QueueElement<data_val_type>* AddElement(data_val_type val)
 	{
 		QueueElement<data_val_type> *temp = NULL;
 		lock_queue current_lock;
