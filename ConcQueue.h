@@ -39,6 +39,11 @@ public:
 	{
 		return next;
 	}
+
+	const data_val_type* GetPointerToData()
+	{
+		return (&data_value);
+	}
 };
 
 template<class data_val_type> class ConcQueue
@@ -73,7 +78,7 @@ public:
 		}
 	}
 	
-	void AddElement(data_val_type val)
+	QueueElement<data_val_type>* AddElement(data_val_type val)
 	{
 		QueueElement<data_val_type> *temp = NULL;
 		lock_queue current_lock;
@@ -96,12 +101,16 @@ public:
 		 	head = new QueueElement<data_val_type>(val);
 		 	tail = head;
 			CAS(&(insertion_lock.lock_value), 1 ,0);
+
+			return (head);
 		 }
 		 else
 		 {
 		 	tail->SetPointer(temp);
 		 	tail = temp;
 			CAS(&(insertion_lock.lock_value), 1, 0);
+
+			return (temp);
 		 }
 	}
 
