@@ -35,12 +35,12 @@ public:
 		next = a;
 	}
 
-	QueueElement* GetPointer()
+	const QueueElement* GetPointer() const
 	{
 		return next;
 	}
 
-	const data_val_type* GetPointerToData()
+	const data_val_type* GetPointerToData() const
 	{
 		return (&data_value);
 	}
