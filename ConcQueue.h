@@ -48,7 +48,7 @@ public:
 
 template<class data_val_type> class ConcQueue
 {
-	QueueElement<data_val_type> *head;
+	const QueueElement<data_val_type> *head;
 	QueueElement<data_val_type> *tail;
 	lock_queue insertion_lock;
 	lock_queue deletion_lock;
@@ -67,7 +67,7 @@ public:
 
 	void PrintQueue()
 	{
-		QueueElement<data_val_type> *traverse = NULL;
+		const QueueElement<data_val_type> *traverse = NULL;
 
 		traverse = head;
 
@@ -82,7 +82,6 @@ public:
 	{
 		QueueElement<data_val_type> *temp = NULL;
 		lock_queue current_lock;
-		timespec time1, time2;
 
 		temp = new QueueElement<data_val_type>(val);
 		temp->SetPointer(NULL);
@@ -98,8 +97,8 @@ public:
 
 		 if(head == NULL && tail == NULL)
 		 {
-		 	head = new QueueElement<data_val_type>(val);
-		 	tail = head;
+		 	tail = new QueueElement<data_val_type>(val);
+		 	head = tail;
 			CAS(&(insertion_lock.lock_value), 1 ,0);
 
 			return (head);
@@ -136,9 +135,7 @@ public:
 
 	~ConcQueue()
 	{
-		QueueElement<data_val_type> *temp = NULL;
-
-		temp = head;
+		const QueueElement<data_val_type>* temp = head;
 
 		while(head != NULL)
 		{
