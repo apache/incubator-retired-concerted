@@ -115,9 +115,9 @@ public:
 
 	QueueElement<data_val_type>* GetElement()
 	{
-		QueueElement<data_val_type>* current_element = NULL;
+		const QueueElement<data_val_type> *current_element = head;
+		QueueElement<data_val_type> *temp = NULL;
 		
-		current_element = head;
 		while(!(CAS(&(deletion_lock.lock_value), 0, 1)))
 		{
 			//Spin waiting for the lock
@@ -129,8 +129,14 @@ public:
 		}
 
 		CAS(&(deletion_lock.lock_value) ,1, 0);
+		/* When popping an element from the queue and returning it,the
+		 * ownership of the element is changed from the queue to the
+		 * calling function. Hence, the element is no longer required
+		 * to be const.
+		 */
+		temp = const_cast<QueueElement<data_val_type>*> (current_element);
 
-		return (current_element);
+		return (temp);
 	}
 
 	~ConcQueue()
