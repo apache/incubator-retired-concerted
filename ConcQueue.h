@@ -35,7 +35,7 @@ public:
 		next = a;
 	}
 
-	const QueueElement* GetPointer() const
+	QueueElement* GetPointer() const
 	{
 		return next;
 	}
@@ -48,7 +48,7 @@ public:
 
 template<class data_val_type> class ConcQueue
 {
-	const QueueElement<data_val_type> *head;
+	QueueElement<data_val_type> *head;
 	QueueElement<data_val_type> *tail;
 	lock_queue insertion_lock;
 	lock_queue deletion_lock;
@@ -113,9 +113,42 @@ public:
 		 }
 	}
 
+	const QueueElement<data_val_type>* AddElementInFront(data_val_type val)   //Use with EXTREME caution.
+	{
+		QueueElement<data_val_type> *temp = NULL;
+		lock_queue current_lock;
+
+		temp = new QueueElement<data_val_type>(val);
+		temp->SetPointer(NULL);
+
+		/* Synchronization by locking with compare and swap.The current value of 
+                 * lock is compared with the expected value(locked,unlocked) and  
+                 * swapped accordingly.Threads spin until they acquire the lock.
+                 */
+		 while(!(CAS(&(insertion_lock.lock_value), 0, 1)))
+		 {
+			// Spinning waiting for lock.
+		 }
+
+		 if(head == NULL && tail == NULL)
+		 {
+		 	tail = new QueueElement<data_val_type>(val);
+		 	head = tail;
+			CAS(&(insertion_lock.lock_value), 1 ,0);
+
+			return (head);
+		 }
+		 else
+		 {
+			temp->SetPointer(head);
+			head = temp;
+		 }
+
+		 return (temp);
+	}
 	QueueElement<data_val_type>* GetElement()
 	{
-		const QueueElement<data_val_type> *current_element = head;
+		QueueElement<data_val_type> *current_element = head;
 		QueueElement<data_val_type> *temp = NULL;
 		
 		while(!(CAS(&(deletion_lock.lock_value), 0, 1)))
@@ -134,14 +167,14 @@ public:
 		 * calling function. Hence, the element is no longer required
 		 * to be const.
 		 */
-		temp = const_cast<QueueElement<data_val_type>*> (current_element);
-
+		//temp = const_cast<QueueElement<data_val_type>*> (current_element);
+		temp = current_element;
 		return (temp);
 	}
 
 	~ConcQueue()
 	{
-		const QueueElement<data_val_type>* temp = head;
+		QueueElement<data_val_type>* temp = head;
 
 		while(head != NULL)
 		{

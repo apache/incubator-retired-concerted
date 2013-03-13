@@ -1,0 +1,65 @@
+Read and Write lock queues per bucket.
+
+The queues are global.
+
+Lock location = segment index + position
+
+ReadValue
+{
+	Check if write lock is taken.
+	if (lock taken)
+	{
+		Spin waiting for write lock to be released.
+	}
+		
+	get read lock
+	read value
+	release read lock
+
+	return (value)
+}
+
+int GetReadLock(int seg_index, int pos)
+{
+	get write lock queue for the corresponding bucket.
+	Check if write lock is taken
+	if(lock taken)
+	{
+		spin waiting for lock to be released
+	}
+
+	get corresponding read lock queue for the corrosponding bucket.
+	get read lock
+
+	return 1
+}
+
+int GetWriteLock(int seg_index, int pos)
+{
+	get read lock queue for the corresponding bucket.
+	Check if read lock is taken.
+	if(lock_taken)
+	{
+		spin waiting for lock to be released
+	}
+
+	get corresponding write lock queue for the corresponding bucket
+	get write lock
+
+	return 1
+}
+
+Insertion:
+
+1) If pos given by hash function in any segment is 0; return 1;
+2) If(not 1 && ReplaceValue == true)
+   {
+	replace in the first segment;
+	return 1;
+   }
+3) If(not 1 && ReplaceValue == false)
+   {
+	open addressing to insert value in any segment.
+        if insertion not possible, return 0;
+	else return 1;
+   }
