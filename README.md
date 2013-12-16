@@ -99,18 +99,26 @@ The Transaction Manager manages the transactions taking place inside the databas
 Examples
 ========
 
-<pre><code> 	
+<pre><code> 
 		int att_array[3];
 		int i = 0;
+		// An object of TransactionManager corresponds to one transaction. When an object is instantiated, a transaction is initiated. If commit_transaction() is not explicitly called, when
+		// the object is destroyed, the transaction is auto rollbacked.
 		TransactionManager transact_val1;
+
+		// A pointer to a DCT tree instance.
 		dct_tree *tree_val = NULL;
+
 		tree_val = build_dcttree(3);
 		att_array[0] = 1;
 		att_array[1] = 2;
 		att_array[2] = 3;
 		try
 		{
+			// insert_val takes in an array of values to be searched, a pointer to an instance of DCT tree and the object of TransactionManager class being used.
 			insert_val(att_array, tree_val, transact_val1);
+
+			// Committing the transaction
 			transact_val1.commit_transaction();
 		}catch (int e)
 		{
@@ -128,7 +136,7 @@ Examples
 		}
 </pre></code>
 
-For examples of usage, please see the tests included.
+For more examples of usage, please see the tests included.
 
 Tests
 =====
