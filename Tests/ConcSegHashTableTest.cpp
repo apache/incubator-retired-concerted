@@ -1,4 +1,4 @@
-#include "ConcSegHashTable.h"
+#include "../ConcSegHashTable.h"
 
 ConcSegHashTable<int> tab1(10,2);
 void *thread_lock_test(void *arg1)

@@ -1,4 +1,4 @@
-#include "QueueLock.h"
+#include "../QueueLock.h"
 
 class linked_list
 {

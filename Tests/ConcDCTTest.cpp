@@ -1,5 +1,4 @@
-#include "ConcDCT.h"	
-	
+#include "../ConcDCT.h"	
 	int main()
 	{
 		int att_array[3];

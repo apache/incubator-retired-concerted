@@ -1,4 +1,4 @@
-#include "ConcDCT.h"
+#include "../ConcDCT.h"
 
 	void *thread_lock_test1(void *arg1)
 	{

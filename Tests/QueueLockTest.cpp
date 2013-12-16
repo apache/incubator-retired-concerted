@@ -1,5 +1,5 @@
 #include<unistd.h>
-#include "QueueLock.h"
+#include "../QueueLock.h"
 
 QueueLock GlobalQueueLock;
 void *thread_getlock_start(void *arg1)
@@ -32,13 +32,7 @@ int main()
 	pthread_create(&tid3,NULL,thread_getlock_start,(void*)(name3));
 	pthread_create(&tid4,NULL,thread_getlock_start,(void*)(name4));
 	pthread_create(&tid5,NULL,thread_getlock_start,(void*)(name5));
-	
 
-	//cout<<"pid of thread1 is"<<" "<<tid1<<endl;
-	//cout<<"pid of thread2 is"<<" "<<tid2<<endl;
-	//cout<<"pid of thread3 is"<<" "<<tid3<<endl;
-
-	
 	pthread_join(tid1,NULL);
 	pthread_join(tid2,NULL);
 	pthread_join(tid3,NULL);

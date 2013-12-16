@@ -1,4 +1,4 @@
-#include "ConcMAT.h"	
+#include "../ConcMAT.h"	
 
 	int main()
 	{

@@ -2,7 +2,7 @@
 #include <sstream>
 #include <fstream>
 #include <string>
-#include "ConcDCT.h"
+#include "../ConcDCT.h"
 
 using namespace std;
 

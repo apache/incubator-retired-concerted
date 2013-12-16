@@ -2,7 +2,7 @@
 #include <sstream>
 #include <fstream>
 #include <string>
-#include "ConcMAT.h"
+#include "../ConcMAT.h"
 
 using namespace std;
 
