@@ -21,6 +21,7 @@ Concerted implements its own locking manager using g++'s built in atomics.
 
 
 Features of Concerted
+=====================
 
 Concerted has many features. We will be discussing three of them here:
 
@@ -32,8 +33,7 @@ Concerted is built on the principle of optimistic concurrency control.
 
 
 Fundamental Principles behind building Concerted
-
-Key Ideas in Solution
+================================================
 
 Using multidimensional data structures to store data: 
 
@@ -45,6 +45,7 @@ Highly scalable systems can be built by fine graining the locking that takes pla
 
 
 Components of Concerted
+=======================
 
 The components of Concerted are:
 
@@ -60,6 +61,7 @@ The components of Concerted are:
 
 
 Locking Manager
+==============
 
 The locking manager manages the locking in Concerted. It manages the locking with read and write locks and lock upgradation.
 
@@ -71,21 +73,25 @@ The locking manager is designed with NUMA in mind. Hence, the flags for checking
 
 
 Data Store
+==========
 
 The data store is the component of Concerted which holds the data present in the database. The data is stored in various data structures and written to disk. The data from a specific data structure is read from disk into main memory when queries based on it are present.
 
 
 
 Cache
+=====
 
 A cache is present which reads the data from disk and keeps it in main memory. The cache has LRU based page replacement algorithm.
 
 
 Transaction Manager
+===================
 
 The Transaction Manager manages the transactions taking place inside the database and ensures consistency in the data. The transaction manager makes all the changes done to the data in a local copy of the data and writes the changes to the main data store only when commit takes place. Commit takes place when all the operations complete successfully.
 
 Examples
+========
 
 For examples of usage, please see the tests included. All code files ending with 'test' in their name have tests.
 
