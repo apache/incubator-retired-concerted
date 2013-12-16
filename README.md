@@ -1,6 +1,8 @@
 Concerted
 =========
 
+PLEASE NOTE: The project is highly WIP. Skip lists and Cache are not yet completely working. Please refrain from using them. Rest of the components are completely functional.
+
 Concerted is a highly concurrent library of data structures which is built with in built support for multi variate queries and looks at performing well over many styles of workloads.
 
 The data is read and stored in various data structures, and the data from data structures written to disk.
