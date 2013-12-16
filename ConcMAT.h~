@@ -130,6 +130,10 @@ public:
 					cout<<"value found"<<" "<<temp->getval()<<" "<<val<<endl;
 					return temp;
 				}
+				else
+				{
+					cout<<"value not found2"<<" "<<temp->getval()<<" "<<i<<endl;
+				}
 
 			}
 

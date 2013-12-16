@@ -26,6 +26,8 @@ public:
 	void copy_pointer_val(ConcertedDef *copy_val1)
 	{
 		dct_node *copy_val = (dct_node*)copy_val1;
+
+		cout<<"In dct_node copy_pointer_val"<<endl;
 		*this = *copy_val;
 	}
 
@@ -209,6 +211,8 @@ public:
 
 		while (traverse != NULL)
 		{
+
+			cout<<"In loop"<<endl;
 			write_lock_val = traverse->getwrite_lock_val();
 			read_lock_val = traverse->getread_lock_val();
 
