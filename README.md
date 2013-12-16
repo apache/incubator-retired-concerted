@@ -19,6 +19,12 @@ Concerted has locking schemes which allow for high scalability in both read and 
 
 Concerted implements its own locking manager using g++'s built in atomics.
 
+Dependencies
+============
+
+Concerted has to be built with g++, since it uses g++'s built ins.
+
+For running the tests, pthread library is required. It is not required for building or using Concerted itself.
 
 Features of Concerted
 =====================
@@ -94,5 +100,12 @@ Examples
 ========
 
 For examples of usage, please see the tests included.
+
+Tests
+=====
+
+For running any test present in the Tests folder, please use:
+
+g++ [name of code file to compile] -lpthread -lrt
 
 
