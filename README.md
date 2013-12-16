@@ -93,6 +93,6 @@ The Transaction Manager manages the transactions taking place inside the databas
 Examples
 ========
 
-For examples of usage, please see the tests included. All code files ending with 'test' in their name have tests.
+For examples of usage, please see the tests included.
 
 
