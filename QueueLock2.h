@@ -14,7 +14,7 @@ public:
 	{
 	}
 
-	int GetLock(char *name1)
+	int GetLock()
 	{
 		struct timespec requestStart, requestEnd;
 		if(lock_taken != 0)
@@ -49,7 +49,7 @@ public:
 		return (1);
 	}
 
-	void ReleaseLock(char *name1)
+	void ReleaseLock()
 	{
 		QueueElement<int> *p_release = lock_queue.GetElement();
 
@@ -65,7 +65,7 @@ public:
 
 	}
 
-	int ForceLock(char *name1)   //Use with EXTREME caution.
+	int ForceLock()   //Use with EXTREME caution.
 	{
 		const QueueElement<int> *p_add = lock_queue.AddElementInFront(0);
 		const int *p_spin = p_add->GetPointerToData();

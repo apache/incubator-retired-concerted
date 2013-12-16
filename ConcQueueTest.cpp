@@ -7,7 +7,7 @@ int main()
 	cout<<"Value is"<<(p1->GetData())<<endl;
 	cout<<(intqueue.AddElement(6)->GetData())<<endl;
 	intqueue.AddElement(7);
-
+	intqueue.GetToFront(intqueue.SearchQueue(6));
 	intqueue.PrintQueue();
 }
 

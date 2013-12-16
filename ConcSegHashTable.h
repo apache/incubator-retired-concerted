@@ -46,22 +46,18 @@ public:
 	{
 		QueueLock *current_write = write_lock_queues + (seg_index + pos);
 		QueueLock *current_read = read_lock_queues + (seg_index + pos);
-		const int *p_write_lock_flag = current_write->GetPointerToFlag();
+		const volatile int *p_write_lock_flag = current_write->GetPointerToFlag();
 
 		if(current_write->CheckLockIsAcquired() == 1)
 		{
 			while(*(p_write_lock_flag) != 0)
 			{
 				//Spinning waiting for write lock to release
-				cout<<"Spinning in GetReadLock"<<endl;
 			}
 
 		}
 
-		current_read->GetLock(name1);
-		cout<<"Acquired read lock"<<endl;
-
-		return (1);
+		return (current_read->GetLock(name1));
 	}
 
 	int GetWriteLock(int seg_index, int pos, char *name1)
@@ -75,15 +71,11 @@ public:
 			while(*(p_read_lock_flag) != 0)
 			{
 				//Spinning waiting for read lock to release
-				cout<<"Spinning write lock"<<endl;
 			}
 
 		}
 
-		current_write->GetLock(name1);
-		cout<<"Acquired write lock"<<endl;
-
-		return (1);
+		return (current_write->GetLock(name1));
 	}
 
 	void UpgradeLock(int seg_index, int pos, char *name1)
@@ -109,7 +101,6 @@ public:
 		QueueLock *current_read = read_lock_queues + (seg_index + pos);
 
 		current_read->ReleaseLock(name1);
-		cout<<"Read lock released"<<endl;
 	}
 
 	int SegmentInsert(int seg_index, data_val_type val, int pos, bool ReplaceValue, char *name1)
@@ -118,7 +109,6 @@ public:
 		int get_read_lock = 0;
 		int check_lock_status = 0;
 
-		//get_write_lock = GetWriteLock(seg_index, pos, name1);
 		check_lock_status = (write_lock_queues + (seg_index + pos))->CheckLockIsAcquired();
 		if(check_lock_status == 1)
 		{
@@ -126,23 +116,22 @@ public:
 		}
 		else
 		{	
-			get_write_lock = GetWriteLock(seg_index, pos, name1);	
+			get_write_lock = GetWriteLock(seg_index, pos, name1);
+			if(get_write_lock == 0)
+			{
+				cout<<"did not get lock"<<" "<<seg_index<<" "<<pos<<" "<<name1<<endl;
+				return (0);
+			}
+
 			if(*(*(hash_tables + seg_index) + pos) == 0 || ReplaceValue == true)
 			{
-				//ReleaseReadLock(seg_index, pos, name1);
-				//get_write_lock = GetWriteLock(seg_index, pos, name1);
 				*(*(hash_tables + seg_index) + pos) = val;
 				ReleaseWriteLock(seg_index, pos, name1);
 
 				return (1);
 			}
-			else
-			{
-				cout<<"Value not zero"<<" "<<seg_index<<" "<<pos<<endl;
-			}
-
+			
 		}
-			//ReleaseWriteLock(seg_index, pos, name1);
 
 			return (0);
 	}
@@ -202,7 +191,7 @@ public:
 		}
 
 		return (0);
-}
+	}
 
 	void PrintValues()
 	{

@@ -172,6 +172,56 @@ public:
 		return (temp);
 	}
 
+	QueueElement<data_val_type>* SearchQueue(data_val_type val)
+	{
+		QueueElement<data_val_type> *traverse = head;
+
+		while (traverse != NULL)
+		{
+			if ((traverse->GetData()) == val)
+			{
+				return (traverse);
+			}
+
+			traverse = traverse->GetPointer();
+
+		}
+
+		cout<<"value not found SearchQueue"<<endl;
+
+		return NULL;
+	}
+
+	int GetToFront(QueueElement<data_val_type> val)
+	{
+		int val_found = 0;
+		QueueElement<data_val_type> *traverse = head;
+		QueueElement<data_val_type> *traverse2 = head;
+
+		while (traverse != NULL)
+		{
+			if ((traverse->GetData()) == val)
+			{
+				cout<<"value found GetToFront"<<endl;
+				val_found = 1;
+				break;
+			}
+
+			traverse2 = traverse;
+			traverse = traverse->GetPointer();
+
+		}
+
+		if (val_found == 1)
+		{
+			traverse2->SetPointer(traverse->GetPointer());
+			AddElementInFront(traverse->GetData());
+			return 1;
+		}
+
+		return -1;
+	}
+
 	~ConcQueue()
 	{
 		QueueElement<data_val_type>* temp = head;

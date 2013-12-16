@@ -45,7 +45,11 @@ void *thread_lock_test3(void *arg1)
 	cout<<"read lock with"<<" "<<(char*)arg1<<endl;
 	tab1.ReleaseReadLock(0,2, (char*)arg1);
 	cout<<"read lock released by"<<" "<<(char*)arg1<<endl;*/
-	tab1.InsertElement(6, false, (char*)arg1);
+	if((tab1.InsertElement(6, false, (char*)arg1)) == 0)
+	{
+		cout<<"Value not inserted"<<" "<<(char*)arg1<<" "<<6<<endl;
+	}
+
 	//tab1.InsertElement(6, false, (char*)arg1);
 }
 
@@ -69,12 +73,12 @@ int main()
 	pthread_create(&tid1,NULL,thread_lock_test,(void*)name1);
 	pthread_create(&tid2,NULL,thread_lock_test2,(void*)name2);
 	pthread_create(&tid3,NULL,thread_lock_test3,(void*)name3);
-	//pthread_create(&tid4,NULL,thread_lock_test4,(void*)name4);
+	pthread_create(&tid4,NULL,thread_lock_test4,(void*)name4);
 
 	pthread_join(tid1,NULL);
 	pthread_join(tid2,NULL);
 	pthread_join(tid3,NULL);
-	//pthread_join(tid4,NULL);
+	pthread_join(tid4,NULL);
 
 	tab1.PrintValues();
 
