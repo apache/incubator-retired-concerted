@@ -5,6 +5,8 @@ PLEASE NOTE: The project is highly WIP. Skip lists and Cache are not yet complet
 
 Concerted is a highly concurrent library of data structures which is built with in built support for multi variate queries and looks at performing well over many styles of workloads.
 
+The IRC channel is #concerted on Freenode.
+
 The data is read and stored in various data structures, and the data from data structures written to disk.
 
 Concerted is fully ACID compliant.
