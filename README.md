@@ -100,6 +100,7 @@ Examples
 ========
 
 <pre><code> 
+
 		int att_array[3];
 		int i = 0;
 		// An object of TransactionManager corresponds to one transaction. When an object is instantiated, a transaction is initiated. If commit_transaction() is not explicitly called, when
@@ -115,11 +116,11 @@ Examples
 		att_array[2] = 3;
 		try
 		{
-			// insert_val takes in an array of values to be searched, a pointer to an instance of DCT tree and the object of TransactionManager class being used.
-			insert_val(att_array, tree_val, transact_val1);
+		// insert_val takes in an array of values to be searched, a pointer to an instance of DCT tree and the object of TransactionManager class being used.
+		insert_val(att_array, tree_val, transact_val1);
 
-			// Committing the transaction
-			transact_val1.commit_transaction();
+		// Committing the transaction
+		transact_val1.commit_transaction();
 		}catch (int e)
 		{
 			cout<<"exception caught"<<" "<<e<<endl;
