@@ -1,25 +1,19 @@
 Concerted
 =========
 
-PLEASE NOTE: The project is highly WIP. Skip lists and Cache are not yet completely working. Please refrain from using them. Rest of the components are completely functional.
 
-Concerted is a highly concurrent library of data structures which is built with in built support for multi variate queries and looks at performing well over many styles of workloads.
+Concerted is a next generation big data engine aimed at supporting massive in memory reads for OLAP support.
 
 The IRC channel is #concerted on Freenode.
 
-The data is read and stored in various data structures, and the data from data structures written to disk.
+The engine is flexible, with no single point of entry and flexibility to use APIs suited for each use case with full scalability.
 
 Concerted is fully ACID compliant.
 
-Concerted has APIs for accessing the data structures available. It aims at abstracting a lot of details from the user and aims to provide an easy to use interface to the user for interacting with the data structures.
+Concerted allows applications to use the native APIs to have the flexibility to store, access, scale data in memory on demand. No auxillary infrastructure is needed.
 
-Concerted has many different types of indexes, which are useful for various types of queries.
+Concerted implements its own locking manager and transaction manager utilizing the object oriented model, thus greatly simplifying the management of processes like commit and abort, depending a lot on the OS's native support.
 
-Concerted has various systems to provide access for data analytics and supports   various sorts of data access in different patterns for help in data analysis of different dimensions.
-
-Concerted has locking schemes which allow for high scalability in both read and write.
-
-Concerted implements its own locking manager using g++'s built in atomics.
 
 Dependencies
 ============
@@ -28,28 +22,22 @@ Concerted has to be built with g++, since it uses g++'s built ins.
 
 For running the tests, pthread library is required. It is not required for building or using Concerted itself.
 
-Features of Concerted
+Features
 =====================
 
-Concerted has many features. We will be discussing three of them here:
+Concerted was built with the principal of "Write Less Read Many". Although tapes are no longer much in use, the principal of highly scalable reads still applies to big data. In memory scaling of reads can help OLAP engines to have massive read mostly data in memory available on demand and for a high number of concurrent readers.
 
-ACID Compliant.
-Highly read and write scalable.
-Support for multi dimensional queries.
+Imagine a star schema. OLAP engine would like fact table to be present in memory and optimized for high analytical reads. Concerted fills that gap.
 
-Concerted is built on the principle of optimistic concurrency control.
+Concerted has storage layouts which allow pre aggregation and multi dimensional view of data.
+
+And yes, Concerted's own footprint will not affect your application size!
 
 
-Fundamental Principles behind building Concerted
+Plug and Play Model
 ================================================
 
-Using multidimensional data structures to store data: 
-
-If we store data in multidimensional data structures and use them to read data, then, we can support multivariate queries efficiently, since we will be able to take into consideration the correlation between the different attributes of a table. Data shall be seen in terms of records instead of individual attributes.
-
-
-Highly Scalable systems: 
-Highly scalable systems can be built by fine graining the locking that takes place inside the system. Scalability can be improved by using appropriate locking techniques and ensuring that the costs of locks are less. This also has to be ensured that the time duration of holding the lock is minimized.
+Concerted works on the principle of Plug and Play. Instead of providing a fixed engine and structure to mould your data and requirements in, Concerted's dynamic APIs allow you to use Concerted as and when required in your core application while ensuring massive scalability and all of Concerted's features whenever you use them!
 
 
 Components of Concerted
