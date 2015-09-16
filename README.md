@@ -64,7 +64,7 @@ make all builds and makes libconcerted.a which is present in build folder and sh
 <br>
 3) copy /build/libconcerted.a to your application's library folder
 <br>
-4) add libconcerted.a as a dependency in your application (or just compile using -llibconcerted in g++)
+4) add libconcerted.a as a dependency in your application (or just compile using -lconcerted in g++)
 
 
 Components of Concerted
