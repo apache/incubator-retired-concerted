@@ -59,8 +59,11 @@ make all builds and makes libconcerted.a which is present in build folder and sh
 <h1> Building and Installing Concerted </h1>
 
 1) run make clean
+<br>
 2) run make all
+<br>
 3) copy /build/libconcerted.a to your application's library folder
+<br>
 4) add libconcerted.a as a dependency in your application (or just compile using -llibconcerted in g++)
 
 
