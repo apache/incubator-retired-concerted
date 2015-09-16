@@ -1,6 +1,10 @@
 OBJS = obj/CacheManager.o obj/ConcDCT.o obj/ConcMAT.o obj/ConcQueue.o obj/ConcSegHashTable.o obj/ConcInvertedIndex.o
 
-all: libconcerted.a obj/CacheManager.o obj/ConcDCT.o obj/ConcInvertedIndex.o obj/ConcMAT.o obj/ConcQueue.o obj/ConcSegHashTable.o
+all: mkdirectory libconcerted.a obj/CacheManager.o obj/ConcDCT.o obj/ConcInvertedIndex.o obj/ConcMAT.o obj/ConcQueue.o obj/ConcSegHashTable.o
+
+mkdirectory :
+	mkdir -p obj
+	mkdir -p build
 
 libconcerted.a : $(OBJS)
 	ar cr build/libconcerted.a $(OBJS)
@@ -25,4 +29,5 @@ obj/ConcSegHashTable.o : src/ConcSegHashTable.h
 
 clean:
 	rm build/libconcerted.a
-	rm obj/*.o
+	rm -r obj
+	rm -r build
