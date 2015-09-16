@@ -39,6 +39,19 @@ Plug and Play Model
 
 Concerted works on the principle of Plug and Play. Instead of providing a fixed engine and structure to mould your data and requirements in, Concerted's dynamic APIs allow you to use Concerted as and when required in your core application while ensuring massive scalability and all of Concerted's features whenever you use them!
 
+Building Concerted
+================================================
+
+The way of building Concerted is executing below command:
+
+make all
+
+Cleaning is below:
+
+make clean
+
+make all builds and makes libconcerted.a which is present in build folder and should be linked in application using Concerted.
+
 
 Components of Concerted
 =======================
