@@ -44,13 +44,24 @@ Building Concerted
 
 The way of building Concerted is executing below command:
 
+<pre><code>
 make all
+</pre></code>
 
 Cleaning is below:
 
+<pre><code>
 make clean
+</pre></code>
 
 make all builds and makes libconcerted.a which is present in build folder and should be linked in application using Concerted.
+
+<h1> Building and Installing Concerted </h1>
+
+1) run make clean
+2) run make all
+3) copy /build/libconcerted.a to your application's library folder
+4) add libconcerted.a as a dependency in your application (or just compile using -llibconcerted in g++)
 
 
 Components of Concerted
