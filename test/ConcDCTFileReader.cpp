@@ -2,7 +2,7 @@
 #include <sstream>
 #include <fstream>
 #include <string>
-#include "../ConcDCT.h"
+#include "../include/ConcDCT.h"
 
 using namespace std;
 
@@ -24,7 +24,7 @@ while (std::getline(infile, line))  // this does the checking!
   char c;
 
    int value;
-  while (iss >> value) 
+  while (iss >> value)
   {
 	if (count == 3)
 	{

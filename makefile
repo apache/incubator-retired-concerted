@@ -9,22 +9,22 @@ mkdirectory :
 libconcerted.a : $(OBJS)
 	ar cr build/libconcerted.a $(OBJS)
 
-obj/CacheManager.o : src/CacheManager.h
+obj/CacheManager.o : include/CacheManager.h
 	g++ -c $< -o $@
 
-obj/ConcDCT.o : src/ConcDCT.h
+obj/ConcDCT.o : include/ConcDCT.h
 	g++ -c $< -o $@
 
-obj/ConcInvertedIndex.o : src/ConcInvertedIndex.h
+obj/ConcInvertedIndex.o : include/ConcInvertedIndex.h
 	g++ -c $< -o $@
 
-obj/ConcMAT.o : src/ConcMAT.h
+obj/ConcMAT.o : include/ConcMAT.h
 	g++ -c $< -o $@
 
-obj/ConcQueue.o : src/ConcQueue.h
+obj/ConcQueue.o : include/ConcQueue.h
 	g++ -c $< -o $@
 
-obj/ConcSegHashTable.o : src/ConcSegHashTable.h
+obj/ConcSegHashTable.o : include/ConcSegHashTable.h
 	g++ -c $< -o $@
 
 clean:
