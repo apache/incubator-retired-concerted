@@ -4,10 +4,10 @@
 QueueLock GlobalQueueLock;
 void *thread_getlock_start(void *arg1)
 {
-	GlobalQueueLock.GetLock();
+	GlobalQueueLock.GetLock((char*)arg1);
 	cout<<"Lock acquired by"<<" "<<(char*)arg1<<endl;
 	usleep(1);
-	GlobalQueueLock.ReleaseLock();
+	GlobalQueueLock.ReleaseLock((char*)arg1);
 }
 
 int main()
