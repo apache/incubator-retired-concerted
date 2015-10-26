@@ -1,3 +1,19 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to you under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 #ifndef CONCQUEUE_INCLUDED
 #define CONCQUEUE_INCLUDED
 
@@ -58,7 +74,7 @@ public:
 		insertion_lock.lock_value = 0;
 		deletion_lock.lock_value = 0;
 	}
-	
+
 	int CAS(volatile int *val, int compare_value, int swap_value)
 	{
 
@@ -77,7 +93,7 @@ public:
 			traverse = traverse->GetPointer();
 		}
 	}
-	
+
 	const QueueElement<data_val_type>* AddElement(data_val_type val)
 	{
 		QueueElement<data_val_type> *temp = NULL;
@@ -86,8 +102,8 @@ public:
 		temp = new QueueElement<data_val_type>(val);
 		temp->SetPointer(NULL);
 
-		/* Synchronization by locking with compare and swap.The current value of 
-                 * lock is compared with the expected value(locked,unlocked) and  
+		/* Synchronization by locking with compare and swap.The current value of
+                 * lock is compared with the expected value(locked,unlocked) and
                  * swapped accordingly.Threads spin until they acquire the lock.
                  */
 		 while(!(CAS(&(insertion_lock.lock_value), 0, 1)))
@@ -121,8 +137,8 @@ public:
 		temp = new QueueElement<data_val_type>(val);
 		temp->SetPointer(NULL);
 
-		/* Synchronization by locking with compare and swap.The current value of 
-                 * lock is compared with the expected value(locked,unlocked) and  
+		/* Synchronization by locking with compare and swap.The current value of
+                 * lock is compared with the expected value(locked,unlocked) and
                  * swapped accordingly.Threads spin until they acquire the lock.
                  */
 		 while(!(CAS(&(insertion_lock.lock_value), 0, 1)))
@@ -150,7 +166,7 @@ public:
 	{
 		QueueElement<data_val_type> *current_element = head;
 		QueueElement<data_val_type> *temp = NULL;
-		
+
 		while(!(CAS(&(deletion_lock.lock_value), 0, 1)))
 		{
 			//Spin waiting for the lock
@@ -235,5 +251,5 @@ public:
 
 	}
 };
-		 
+
 #endif
