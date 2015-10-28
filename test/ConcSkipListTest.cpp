@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- #include "../include/QueueLock.h"
+#include "../include/QueueLock.h"
 
 class linked_list
 {
@@ -186,7 +186,7 @@ public:
 		insert_val(0, j, temp);
 		/*for (i = 1;i <= (level - 1);i++)
 		{*/
-
+			
 	}
 
 
@@ -267,7 +267,7 @@ public:
 		}
 
 		return -1;
-	}
+	}	
 };
 
 int main()

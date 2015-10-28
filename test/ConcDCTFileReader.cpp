@@ -31,7 +31,7 @@ int count;
 int arr_val[3];
 dct_tree *tree_val = NULL;
 TransactionManager t1;
-
+		
 tree_val = build_dcttree(3);
 count = 0;
 while (std::getline(infile, line))  // this does the checking!
