@@ -14,44 +14,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "../include/ConcInvertedIndex.h"
+#include <iostream>
+#include "../include/tests/ConcDCTTest.h"
+#include "../include/tests/ConcMATTest.h"
+#include "../include/tests/ConcSegHashTableTest.h"
+#include "../include/tests/ConcInvertedIndexTest.h"
+#include "../include/tests/QueueLockTest.h"
 
-int testInvertedIndex(int debugMode)
-	{
-		inv_index<3,0> *index1;
-		int att_values[3];
-		int return_value;
-		int numberOfTestsPassed;
-		int numberOfTestsFailed;
+using namespace std;
 
-		numberOfTestsPassed = 0;
-		numberOfTestsFailed = 0;
-		return_value = 0;
-		index1 = new inv_index<3,0>;
-		att_values[0] = 3;
-		att_values[1] = 4;
-		att_values[2] = 5;
+int main()
+{
+  int res1 = 0;
+  int res2 = 0;
+  int res3 = 0;
 
-		insert_val(att_values, index1);
+  res1 = testDCT(0);
+  if (res1)
+    throw;
 
-		return_value = search_val(&(att_values[0]), index1);
+  res2 = testMAT(0);
+  if (res2)
+    throw;
 
-		if (return_value == 1)
-		{
-		  if (debugMode)
-		    cout<<"values found"<<" "<<return_value<<endl;
+  testSegHashTable(0);
 
-		  ++numberOfTestsPassed;
-		}
-		else
-		{
-		  if (debugMode)
-		    cout<<"values not found"<<" "<<return_value<<endl;
+  res3 = testInvertedIndex(0);
+  if (res3)
+    throw;
 
-		  ++numberOfTestsFailed;
-
-		}
-
-		return numberOfTestsFailed;
-
-	}
+  cout <<"All tests passed"<<endl;
+}

@@ -14,44 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "../include/ConcInvertedIndex.h"
-
-int testInvertedIndex(int debugMode)
-	{
-		inv_index<3,0> *index1;
-		int att_values[3];
-		int return_value;
-		int numberOfTestsPassed;
-		int numberOfTestsFailed;
-
-		numberOfTestsPassed = 0;
-		numberOfTestsFailed = 0;
-		return_value = 0;
-		index1 = new inv_index<3,0>;
-		att_values[0] = 3;
-		att_values[1] = 4;
-		att_values[2] = 5;
-
-		insert_val(att_values, index1);
-
-		return_value = search_val(&(att_values[0]), index1);
-
-		if (return_value == 1)
-		{
-		  if (debugMode)
-		    cout<<"values found"<<" "<<return_value<<endl;
-
-		  ++numberOfTestsPassed;
-		}
-		else
-		{
-		  if (debugMode)
-		    cout<<"values not found"<<" "<<return_value<<endl;
-
-		  ++numberOfTestsFailed;
-
-		}
-
-		return numberOfTestsFailed;
-
-	}
+#ifndef CONCMATTEST_H
+#define CONCMATTEST_H
+int testMAT(int debugMode);
+#endif

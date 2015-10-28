@@ -14,13 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- #include "../include/ConcMAT.h"
+#include "../include/ConcMAT.h"
 
-	int main()
+	int testMAT(int debugValue)
 	{
 		int att_array[3];
 		int i = 0;
+		int numberOfTestsPassed;
+		int numberOfTestsFailed;
 		mat_tree *tree_val = NULL;
+
+		numberOfTestsPassed = 0;
+		numberOfTestsFailed = 0;
 		tree_val = build_mattree(3);
 		att_array[0] = 1;
 		att_array[1] = 2;
@@ -28,12 +33,21 @@
 		insert_val(att_array, tree_val);
 		if (search_val(att_array, tree_val))
 		{
-			cout<<"All values found"<<endl;
+		  if (debugValue > 0)
+		    cout<<"All values found"<<endl;
+
+		  ++numberOfTestsPassed;
 		}
 		else
 		{
-			cout<<"All values not found"<<endl;
+		  if (debugValue > 0)
+		    cout<<"All values not found"<<endl;
+
+		  ++numberOfTestsFailed;
 		}
 
 		delete tree_val;
+
+		return numberOfTestsFailed;
 	}
+

@@ -26,7 +26,7 @@ void *thread_getlock_start(void *arg1)
 	GlobalQueueLock.ReleaseLock((char*)arg1);
 }
 
-int main()
+void testQueueLock()
 {
 	int data_value = 5;
 	QueueLock lock1;
@@ -55,3 +55,4 @@ int main()
 	pthread_join(tid4,NULL);
 	pthread_join(tid5,NULL);
 }
+

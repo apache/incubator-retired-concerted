@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- #include "../include/ConcSegHashTable.h"
+#include "../include/ConcSegHashTable.h"
 
 ConcSegHashTable<int> tab1(10,2);
 void *thread_lock_test(void *arg1)
@@ -75,7 +75,7 @@ void *thread_lock_test4(void *arg1)
 	tab1.InsertElement(9,false,(char*)arg1);
 }
 
-int main()
+int testSegHashTable(int debugValue)
 {
 	pthread_t tid1;
 	pthread_t tid2;
@@ -96,8 +96,6 @@ int main()
 	pthread_join(tid3,NULL);
 	pthread_join(tid4,NULL);
 
-	tab1.PrintValues();
-
-	//tab1.GetWriteLock(2,3);
-	//tab1.ReleaseWriteLock(2,3);
+	if (debugValue > 0)
+	  tab1.PrintValues();
 }

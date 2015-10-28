@@ -15,10 +15,13 @@
  * limitations under the License.
  */
 #include "../include/ConcDCT.h"
-	int main()
+
+	int testDCT(int debugMode)
 	{
 		int att_array[3];
 		int i = 0;
+		int numberOfTestsPassed = 0;
+		int numberOfTestsFailed = 0;
 		TransactionManager transact_val1;
 		dct_tree *tree_val = NULL;
 		dct_tree *tree_val2 = NULL;
@@ -29,11 +32,11 @@
 		att_array[0] = 1;
 		att_array[1] = 2;
 		att_array[2] = 3;
+
 		try
 		{
 			insert_val(att_array, tree_val, transact_val1);
 			insert_val(att_array, tree_val3, transact_val1);
-			//throw -1;
 			transact_val1.commit_transaction();
 			tree_val2 = copy_val((tree_val->getdummy()), (tree_val->getnumber_of_nodes()));
 		}catch (int e)
@@ -42,37 +45,56 @@
 			return 1;
 		}
 
-		//att_array[2] = 3;
 		if (search_val(att_array, tree_val))
 		{
-			cout<<"All values found"<<endl;
+		  if (debugMode)
+		    cout<<"All values found"<<endl;
+
+		  ++numberOfTestsPassed;
 		}
 		else
 		{
-			cout<<"All values not found"<<endl;
+		  if (debugMode)
+		    cout<<"All values not found"<<endl;
+
+		  ++numberOfTestsFailed;
 		}
 
 		temp = search_val(att_array, tree_val2);
 		if (temp != NULL)
 		{
-			cout<<" All values found copy tree"<<endl;
+		  if (debugMode)
+		    cout<<" All values found copy tree"<<endl;
+
+		  ++numberOfTestsPassed;
 		}
 		else
 		{
-			cout<<"All values not found copy tree"<<endl;
+		  if (debugMode)
+		    cout<<"All values not found copy tree"<<endl;
+
+		  ++numberOfTestsFailed;
 		}
 
 		if (search_val(att_array, tree_val3))
 		{
-			cout<<"All values found3"<<endl;
+		  if (debugMode)
+		    cout<<"All values found3"<<endl;
+
+		  ++numberOfTestsPassed;
 		}
 		else
 		{
-			cout<<"All values not found3"<<endl;
+		  if (debugMode)
+		    cout<<"All values not found3"<<endl;
+
+		  ++numberOfTestsFailed;
 		}
 
 		delete tree_val;
 		delete tree_val2;
 		delete tree_val3;
 		delete temp;
+
+		return numberOfTestsFailed;
 	}

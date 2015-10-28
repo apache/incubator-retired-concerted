@@ -63,7 +63,7 @@
 
 		search_val(arr_val, tree_val);
 	}
-
+		
 	int main()
 	{
 	dct_tree *tree_val = NULL;
@@ -84,3 +84,5 @@
 	pthread_join(tid3,NULL);
 	pthread_join(tid4,NULL);
 	}
+
+	
