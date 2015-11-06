@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 #include "../include/ConcSegHashTable.h"
-
+#include<unistd.h>
 ConcSegHashTable<int> tab1(10,2);
 void *thread_lock_test(void *arg1)
 {
