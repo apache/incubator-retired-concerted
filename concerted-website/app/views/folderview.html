@@ -1,0 +1,8 @@
+<div class="col-md-9 well" ng-repeat="page in pages" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+<div markdown class="well" ng-include="page.url">
+</div>
+</div>
+<div class="col-md-3 well" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+	<h2 class="text-info">Other Pages</h2>
+<ul class="unstyled"><li ng-repeat="page in pages"><a ng-href="#/markdown-pages/{{page.url}}">{{page.title}}</a></li></ul>
+</div>

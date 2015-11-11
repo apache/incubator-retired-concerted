@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# run script to check if commit is valid
+# you can run anything here, I happen to use a node script
+echo "Indexing new posts."
+node setup-hooks/pre-commit.js
+RETVAL=$?
+
+if [ $RETVAL -ne 0 ]
+then
+  echo "Updating new links and adding them to commit"
+  git add news/newslist.json
+  git add markdown-pages/archive.json
+  git add news/archive.json
+  exit 0
+fi
